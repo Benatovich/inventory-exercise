@@ -1,25 +1,88 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import { getUser } from './services/fetch-utils';
+import {
+  BrowserRouter as Router,
+  Switch,
+  NavLink,
+  Route,
+  Redirect,
+} from 'react-router-dom';
+import AuthPage from './AuthPage';
+import ListPage from './ListPage';
+import CreatePage from './CreatePage';
+import UpdatePage from './UpdatePage';
 
-function App() {
+import './App.css';
+import { logout } from './services/fetch-utils';
+
+export default function App() {
+  const [user, setUser] = useState('');
+  // decide which way to do this
+  // const [user, setUser] = useState(localStorage.getItem('supabase.auth.token'));
+
+  useEffect(() => {
+    async function fetch() {
+      const user = await getUser();
+
+      if (user) setUser(user);
+    }
+
+    fetch();
+  }, []);
+
+  // do I need handleLogout or can I just use logout...?
+  async function handleLogout() {
+    await logout();
+
+    setUser('');
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header>
+          {
+            user &&
+          <div>
+            <NavLink exact activeClassName='active-link' to="/games">Games List</NavLink>
+            <NavLink exact activeClassName='active-link' to="/create">Create Entry</NavLink>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+          }
+        </header>
+        <main>
+          <Switch>
+            <Route exact path="/">
+              {
+                user
+                  ? <Redirect to="/games" />
+                  : <AuthPage setUser={setUser} />
+              }
+            </Route>
+            <Route exact path="/games">
+              {
+                user
+                  ? <ListPage/>
+                  : <Redirect to="/" />
+              }
+            </Route>
+            <Route exact path="/create">
+              {
+                user
+                  ? <CreatePage />
+                  : <Redirect to="/" />
+              }
+            </Route>
+            <Route exact path="/edit/:id" >
+              {
+                user
+                  ? <UpdatePage />
+                  : <Redirect to="/" />
+              }
+            </Route>
+          </Switch>
+        </main>
+      </div>
+    </Router>
   );
 }
-
-export default App;
