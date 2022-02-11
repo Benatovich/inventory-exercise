@@ -16,9 +16,9 @@ import './App.css';
 import { logout } from './services/fetch-utils';
 
 export default function App() {
-  const [user, setUser] = useState('');
+  // const [user, setUser] = useState('');
   // decide which way to do this
-  // const [user, setUser] = useState(localStorage.getItem('supabase.auth.token'));
+  const [user, setUser] = useState(localStorage.getItem('supabase.auth.token'));
 
   useEffect(() => {
     async function fetch() {
