@@ -9,7 +9,6 @@ export default function Game({ game }) {
         <p>Available for {game.console}</p>
         <p>Genre: {game.genre}</p>
         <p>Developed by {game.developer}</p>
-        <p>Review: {game.review}</p>
       </div>
     </Link>
   );
