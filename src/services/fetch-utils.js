@@ -41,9 +41,27 @@ export async function getGames() {
 export async function getGameById(id) {
   const response = await client
     .from('games')
-    .select()
+    .select('*')
     .match({ id })
     .single();
+
+  return checkError(response);
+}
+
+export async function updateGame(id, updatedGame) {
+  const response = await client
+    .from('games')
+    .update(updatedGame)
+    .match({ id });
+
+  return checkError(response);
+}
+
+export async function deleteGame(id) {
+  const response = await client
+  .from('games')
+  .delete()
+  .match({ id });
 
   return checkError(response);
 }
