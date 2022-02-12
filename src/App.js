@@ -11,6 +11,7 @@ import AuthPage from './AuthPage';
 import ListPage from './ListPage';
 import CreatePage from './CreatePage';
 import UpdatePage from './UpdatePage';
+import DetailPage from './DetailPage';
 
 import './App.css';
 import { logout } from './services/fetch-utils';
@@ -73,10 +74,10 @@ export default function App() {
                   : <Redirect to="/" />
               }
             </Route>
-            <Route exact path="/edit/:id" >
+            <Route exact path="/games/:id" >
               {
                 user
-                  ? <UpdatePage />
+                  ? <DetailPage />
                   : <Redirect to="/" />
               }
             </Route>

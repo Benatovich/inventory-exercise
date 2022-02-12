@@ -24,6 +24,7 @@ export default function DetailPage() {
       <p>
         {game.review}
       </p>
+      {/* <button></button> */}
     </div>
   );
 }
