@@ -10,7 +10,7 @@ import {
 import AuthPage from './AuthPage';
 import ListPage from './ListPage';
 import CreatePage from './CreatePage';
-import UpdatePage from './UpdatePage';
+// import UpdatePage from './UpdatePage';
 import DetailPage from './DetailPage';
 
 import './App.css';
