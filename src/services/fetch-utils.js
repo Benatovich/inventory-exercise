@@ -59,9 +59,9 @@ export async function updateGame(id, updatedGame) {
 
 export async function deleteGame(id) {
   const response = await client
-  .from('games')
-  .delete()
-  .match({ id });
+    .from('games')
+    .delete()
+    .match({ id });
 
   return checkError(response);
 }

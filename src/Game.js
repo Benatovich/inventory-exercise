@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Game({ game }) {
   return (
-    <Link to={`/games/${game.id}`}>
+    <Link key={game.id + game.title} to={`/edit/${game.id}`}>
       <div className='game'>
         <h3>{game.title}</h3>
         <p>Released in {game.year}</p>

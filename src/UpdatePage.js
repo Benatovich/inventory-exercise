@@ -31,7 +31,7 @@ export default function UpdatePage() {
   async function handleDelete() {
     await deleteGame(id);
 
-    history.push('/list');
+    history.push('/games');
   }
 
   async function handleUpdate(e) {
@@ -46,7 +46,7 @@ export default function UpdatePage() {
       review: review
     });
 
-    history.push('/list');
+    history.push('/games');
   }
 
   return (
